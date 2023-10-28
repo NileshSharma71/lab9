@@ -31,4 +31,5 @@ for i in range(len(a)):
         print(j)
         if a[i][j]!=0:
             print("Upper triangular matrix.")
+
         
