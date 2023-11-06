@@ -1,35 +1,46 @@
-N=int(input("Enter the dimention of matrix: "))
+# Input from the user
+N = int(input("Enter the dimension N of the square matrix: "))
 a=[]
 for i in range(N):
-    k=(input(f"Enter vale of row {i+1} of matrix 1: ")).split()
+    k = list(map(int, input().split()))
     a.append(k)
-#1st one
-c,d=0,0
-for i in range(len(a)):
-    for j in range(len(a)):
-        if a[i][j]==a[j][i]:
-            c+=1
-        else:
-            d+=1
-if c==N*N:
-    print("The matirx is symmetric.")
-else:
-    print('Matrix is not symmetric.')
-
-#2nd one
-t1=0
-t2=0
+# print(N)
+# Find the sum of diagonal elements
+c=0 #principal_sum 
+d=0 #non_principal_sum 
 for i in range(N):
-    t1+=int(a[i][i])
-    t2+=int(a[i][N-1])
-    N-=1
-print("Sum of principle diagonal elements: ",t1)
-print("Sum of non-principle diagonal elements: ",t2)
-#3rd one
-for i in range(len(a)):
-    for j in range(i+1,len(a)):
-        print(j)
-        if a[i][j]!=0:
-            print("Upper triangular matrix.")
+    c += a[i][i]
+    #d += a[i][N-1]
+    #N=N-1
+    d += a[i][N - 1 - i]
+# print(N)
 
-        
+print(f"Sum of principal diagonal elements: {c}")
+print(f"Sum of non-principal diagonal elements: {d}")
+
+#3rd one 
+# Check if the matrix is upper triangular
+is_upper = True
+for i in range(N):
+    # print(N)
+    for j in range(0, i):
+        if a[i][j] != 0:
+            is_upper = False
+            break
+
+# Check if the matrix is lower triangular
+is_lower = True
+for i in range(N):
+    for j in range(i + 1, N):
+        if a[i][j] != 0:
+            is_lower = False
+            break
+
+if is_upper and is_lower:
+    print("The matrix is both upper and lower triangular.")
+elif is_upper:
+    print("The matrix is upper triangular.")
+elif is_lower:
+    print("The matrix is lower triangular.")
+else:
+    print("The matrix is neither upper triangular nor lower triangular.")
